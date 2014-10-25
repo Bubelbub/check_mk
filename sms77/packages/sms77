@@ -1,6 +1,6 @@
 {'author': 'Bubelbub',
  'description': 'Adds a notification per SMS via sms77.de to your check_mk. Cheap SMS Monitoring!',
- 'download_url': 'https://github.com/Bubelbub/check_mk/sms77',
+ 'download_url': 'https://github.com/Bubelbub/check_mk/tree/master/sms77',
  'files': {'agents': [],
            'checkman': [],
            'checks': [],
