@@ -11,7 +11,7 @@ Remove existing `sms77.mkp` if exists.
     $ rm -f sms77.mkp
 
 Then download the newest package file.
-**Note:** The link above is updated on each new update.
+**Note:** The link below is updated on each new update.
 
     $ wget "https://github.com/Bubelbub/check_mk/blob/master/sms77/sms77-1.0.mkp?raw=true" -O sms77.mkp
 
@@ -52,8 +52,8 @@ Or you want only SMS notifications for specific hosts.
 If you have questions you could ask ;)
 
 Example pictures.
-![Configuration of identity](http://i.imgur.com/nKrkCHj.png)
-![Configuration of notification](http://i.imgur.com/CX9910z.png)
+Configuration of identity: http://i.imgur.com/nKrkCHj.png
+Configuration of notification: http://i.imgur.com/CX9910z.png
 
 ## License ##
 
