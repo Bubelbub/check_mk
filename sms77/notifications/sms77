@@ -1,0 +1,41 @@
+#!/usr/bin/python
+# SMS77
+# Notification via SMS using SMS77.de
+# https://github.com/Bubelbub/check_mk/sms77
+
+import os, sys, urllib
+
+__author__ = 'Bubelbub'
+
+if not os.environ.has_key('NOTIFY_CONTACTPAGER'):
+    sys.stderr.write('Error: No contact pager / telephone number for the contact!\n')
+    sys.exit(1)
+
+if not os.environ.has_key('NOTIFY_PARAMETER_1') or not os.environ.has_key('NOTIFY_PARAMETER_2'):
+    sys.stderr.write('Error: No username or no password entered!\n')
+    sys.exit(1)
+
+max_len = 160
+message = os.environ['NOTIFY_HOSTNAME'] + " "
+
+if os.environ['NOTIFY_WHAT'] == 'SERVICE':
+    message += os.environ['NOTIFY_SERVICESTATE'][:2] + " "
+    avail_len = max_len - len(message)
+    message += os.environ['NOTIFY_SERVICEDESC'][:avail_len] + " "
+    avail_len = max_len - len(message)
+    message += os.environ['NOTIFY_SERVICEOUTPUT'][:avail_len]
+else:
+    message += "is " + os.environ['NOTIFY_HOSTSTATE']
+
+data = {}
+data['u'] = os.environ['NOTIFY_PARAMETER_1']
+data['p'] = os.environ['NOTIFY_PARAMETER_2']
+data['to'] = os.environ['NOTIFY_CONTACTPAGER']
+data['text'] = message
+data['type'] = os.environ['NOTIFY_PARAMETER_3'] if os.environ.has_key('NOTIFY_PARAMETER_3') and os.environ['NOTIFY_PARAMETER_3'].lower() in ['basicplus', 'quality', 'festnetz', 'flash'] else 'basicplus'
+
+response = urllib.urlopen('https://gateway.sms77.de' + '?' + urllib.urlencode(data)).read()
+
+if response != '100':
+    sys.stderr.write('SMS not sent. Error code: ' + response)
+    sys.exit(1)
