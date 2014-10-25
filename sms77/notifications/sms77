@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # SMS77
 # Notification via SMS using SMS77.de
-# https://github.com/Bubelbub/check_mk/sms77
+# https://github.com/Bubelbub/check_mk/tree/master/sms77
 
 import os, sys, urllib
 
